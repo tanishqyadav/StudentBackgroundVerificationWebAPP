@@ -1,0 +1,199 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="main-panel">
+
+    <div class="content-wrapper">
+
+        <div class="col-lg-12">
+            {% for m in messages %}
+            <div class="alert alert-success alert-dismissible" id="alt">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>      
+                 <strong>Success!</strong> {{m}}
+                 
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="col-12 stretch-card grid-margin">
+            <div class="card card-secondary">
+                <div class="card-body d-lg-flex  justify-content-between">
+
+                    <div class="font-weight-semibold">Assign/ Allotment</div>
+                    <div class="font-weight-semibold"><a href="dv/dashboard/" title="Dashboard">Verify a
+                            Document</a> / Assign/ Allotment</div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="col-lg-12">
+            <div class="card card-secondary mb-4">
+                <div class="card-body justify-content-between">
+                    <h4>Details </h4>
+                    <div class="row  m-auto">
+
+                        <div class="col-lg-3">
+                            <!-- <table class="mt-3 mb-3">
+                                <tr>
+                                    <td class="pb-2">Ref No</td>
+                                    <td class="font-weight-semibold pb-2">:{{vdobj.id}}</td>
+
+                                </tr> -->
+                                <table >
+                                
+                                    <tr>
+                                        <td class="pb-2">Ref Number / Letter No </td>
+                                        <td class="fn-bld pb-2">: {{vdobj.recieved_reference_no}}</td>
+    
+                                    </tr>
+                                
+                                        
+                                        <tr>
+                                            <td class="pb-2">No. of Docs. </td>
+                                            <td class="fn-bld pb-2">: {{vdobj.doc_no_received}}</td>
+    
+                                        </tr>
+                                        <tr>
+                                            <td class="pb-2">Dealing Assistant </td>
+                                            <td class="fn-bld pb-2">: {{vdobj.dealing_assistant_choice}}</td>
+    
+                                        </tr>
+    
+                                </table>
+
+                            
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="card card-secondary mb-4">
+                <div class="card-body justify-content-between">
+                    
+                    <table class="table table-bordered">
+                        <h4>Allready Assigned</h4>
+                        <thead>
+                            <tr class="table-info">
+                                {% for va in vaobj %}
+                        
+                              <th>{{va.verification_assistant}}</th>
+                              {% endfor %}
+                                
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+                            
+                            {% for avva in availpvobj %}
+                            {% for va in vaobj %}
+                                {% if va.id == avva.verify_id %}
+                                
+                                    <td>
+                                        {{avva.count}}
+                                    </td>
+                                     
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                           
+                        </tbody>
+                        
+                    </table>
+                    
+
+                </div>
+            </div>
+        </div>
+       
+        <div class="col-lg-12">
+            <div class="card card-secondary mb-4">
+                <div class="card-body justify-content-between">
+                    <form action="" method="post">
+                         {% csrf_token %}
+                         {% if form.errors %}
+                            <div class="alert alert-error">
+                            <h8>Please fix the following errors</h8>
+                            <ul>
+                                {% for field in form %}
+                                {% if field.errors %}
+                                    {% for error in field.errors %}
+                                    <li><a href="#id_{{ field.name }}" class="error">{{ error|escape }}</a></li>
+                                    {% endfor %}
+                                {% endif %}
+                                {% endfor %}
+                            </ul>
+                            {% if form.non_field_errors %}
+                                {{ form.non_field_errors }}
+                            {% endif %}
+                            </div>
+                        {% endif %}
+                    <table class="table table-bordered">
+                        <h4>Assign</h4>
+                        <thead>
+                            <tr class="table-info">
+                                <th>Roll Number </th>
+                                <th>Verified </th>
+                                <th>pre allotments</th>
+                            </tr>
+                        </thead>
+                        
+                        
+
+                        <tbody>
+                            {% for p in pvobj %}
+                           <tr>
+                            <td>
+                                <label>{{p.unpacked_rn}}</label>
+                                <input type="hidden" name={{p.unpacked_rn}} value={{p.unpacked_rn}}>
+                            </td>
+                            <td>
+                                <select name="v-{{p.unpacked_rn}}">
+                                    <option value="">-Please Select-</option>
+                                    {% for va in vaobj %}
+                                    <option value="{{va.pk}}">{{va.verification_assistant}}</option>
+                                    {%endfor%}
+                                </select>
+                                
+                            </td>
+                            <td>
+                                {% for va in vaobj %}
+                                {% if va.id == p.verification_assistant_choice_id %}
+                                
+                                    
+                                        {{va.verification_assistant}}
+                                    
+                                     
+                                {% endif %}
+                                {%endfor%}
+                                
+                                
+                            </td>
+                           </tr>
+                           {% endfor %}
+                        </tbody>
+                        
+                    </table>
+                  
+                 
+
+                </div>
+                <div style="display:block; margin:auto;">
+                    <button class="btn btn-sm btn-primary btn-rounded mb-4 " type="submit">Submit</button>
+                    </div>
+               </form>
+            </div>
+        </div>
+
+    </div>
+
+
+{% endblock %}

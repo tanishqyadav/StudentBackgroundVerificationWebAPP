@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="main-panel">
+
+    <div class="content-wrapper">
+        <div class="col-lg-12">
+            {% for m in messages %}
+            <div class="alert alert-success alert-dismissible" id="alt">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>      
+                 <strong>Success!</strong> {{m}}
+                 
+            </div>
+            {% endfor %}
+        </div>
+        <div class="col-lg-12">
+            <div class="card card-secondary mb-4">
+                <div class="card-body d-lg-flex  justify-content-between">
+
+                    <div class="font-weight-semibold">Verification Document</div>
+                    <div class="font-weight-semibold"><a href="dv/dashboard/" title="Dashboard">Dashboard </a> /
+                        Verification Document</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12 stretch-card grid-margin">
+            <div class="card">
+                <div class="card-body justify-content-between">
+                    <div class="row">
+                        <div class="col-lg-10">
+                            Enter details to verify a Marksheet, Migration Certificate etc
+                        </div>
+                      
+
+                         <!-- <div class="col-lg-2">
+                            <button type="submit" class="btn btn-sm btn-rounded  btn-info d-flex m-auto">Generate
+                                Report</button>
+                        </div> -->
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+    
+        {% if form %}
+        <div class="col-lg-12">
+            <div class="card card-secondary mb-4">
+                <div class="card-body justify-content-between">
+                    
+                    <h4 class="mb-5">Doc Rec. for Verification</h4>
+                    <!-- show detail -->
+                    <form action="" method="post">
+
+
+
+                        {% csrf_token %}
+                        <!-- <ul class="errorlist text-danger" style="list-style-type: none;"> -->
+                            <!-- {% if form.non_field_errors %} -->
+                              <!-- <li style="list-style-type: none;">{{ form.non_field_errors }}</li>
+                            {% endif %}
+                            {% for field in form %}
+                              {% if field.errors %}
+                                <li style="list-style-type: none;">
+                                  {{ field.label }}
+                                  <ul class="errorlist">
+                                    {% for error in field.errors %}
+                                      <li style="list-style-type: none;">{{ error }}</li>
+                                    {% endfor %}
+                                  </ul>
+                                </li>
+                              {% endif %}
+                            {% endfor %}
+                          </ul> -->
+
+
+                    <div class="row px-2 mt-2">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="font-weight-semibold" >Ref Number / Letter No.</label>
+                                {{form.recieved_reference_no}}
+                                <!-- <input type="text" class="form-control form-control-sm" placeholder="" required> -->
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="font-weight-semibold" >Date Received</label>
+                                {{form.received_date}}
+                                <!-- <input placeholder="Select date" type="date" id="date"
+                                    class=" form-control form-control-sm" required=""> -->
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="font-weight-semibold" >Received from Org/Dept.</label>
+                                {{form.received_dept}}
+                                <!-- <input type="text" class="form-control form-control-sm" placeholder="" required> -->
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="row px-2 mt-2">
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="exampleInputEmail3" class="font-weight-semibold">Is it a List or Single
+                                    Doc</label>
+                                    {{form.doc_no_received_choice}}
+                                    <!-- <input type="text" class="form-control form-control-sm" placeholder="" required> -->
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label class="font-weight-semibold" >Enter No. if List</label>
+                                {{form.doc_no_received}}
+                                <!-- <input type="text" class="form-control form-control-sm" placeholder="" required> -->
+                            </div>
+                        </div>
+                       
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label class="font-weight-semibold" >Dealing Assistant</label>
+                                <input  value="{{vdasnm}}" class="form-control form-control-sm" disabled>
+                                
+                            </div>
+                        </div>
+                        
+                    </div>
+                   
+                            <!-- <input type="submit" value="submit" class="btn btn-sm btn-rounded btn-info d-flex m-auto" > -->
+                            <button  class="btn btn-sm btn-rounded btn-info d-flex m-auto"><a class="text-white" >Submit</a></button>
+
+                    </form>
+                    {%endif%}
+
+{% endblock %}    

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  {% load static %}
+  <link rel="shortcut icon" href="/static/images/inner-image/logo-2.jpg" />
+     <!-- Plugin css for this page -->
+
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/vendor.bundle.base.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/select2/select2.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/select2-bootstrap-theme/select2-bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/custom.css' %}">
+ 
+  <link rel="stylesheet" href="{% static 'assets/datatables-bs4/css/dataTables.bootstrap4.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/datatables-responsive/css/responsive.bootstrap4.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/datatables-buttons/css/buttons.bootstrap4.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/simple-line-icons/css/simple-line-icons.css' %}">
+
+  <link rel="stylesheet" href="{% static 'assets/daterangepicker/daterangepicker.css' %}">
+
+  <style>
+    .navbar-dark .navbar-nav .nav-link {
+  color: #000;
+  margin: 0px 1rem;
+}
+td.sm-ft.pb-2 {
+    font-size: 17px;
+}
+  </style>
+</head>
+
+<body>
+
+     {% block body%} {% endblock %}
+
+     <div class="container">
+          <nav class="navbar navbar-expand-lg navbar-dark bg-dark-1 fixed-top py-lg-0" id="main_navbar">
+                  <a class="navbar-brand" href="dashboard.php">
+                      <img src="/static/images/inner-image/logo-2.jpg" title="Home" alt="logo" class="logo-dark">
+                  </a>
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                  </button>
+          
+                  <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                      <ul class="navbar-nav ml-auto mr-md-5">
+                          <li class="nav-item">
+                              <a class="nav-link" title="Home" href="/dv/dashboard/">Home</a>
+                          </li>
+                          <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                  data-toggle="dropdown" aria-has="true" aria-expanded="false">
+                                  Doc Veririfcation
+                                 
+                              </a>
+                              <ul class="dropdown-menu animated fadeIn" aria-labelledby="navbarDropdown">
+                              <li><a class="dropdown-item" href="/dv/list/" title="List all">List all</a></li>
+                              {% if duser.user_type == 2 %}
+                              <li><a class="dropdown-item" href="/dv/documentvrecieved/" title="Verify Document">  Doc. Recieved Details  </a></li>
+                                  
+                                {% elif duser.user_type == 1 %}
+                                <li><a class="dropdown-item" href="/dv/verifythese" title="Verify Document"> Perform Verification  </a></li>
+                                {%endif%}
+                              </ul>
+                          </li>
+                          <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                  data-toggle="dropdown" aria-has="true" aria-expanded="false">
+                                  Generate Reports
+                              </a>
+                              <ul class="dropdown-menu animated fadeIn" aria-labelledby="navbarDropdown">
+                              <li><a class="dropdown-item" href="/dv/dreport/" title="Yearly/Monthly Reports.">  <i class="icon-lock-open"></i> Datewise Report</a></li>
+                                  <li><a class="dropdown-item" href="/dv/rdreport/" title="Reports based on dept."> <i class="icon-lock"></i> Ref/Dept-wise Report</a></li>
+                              </ul>
+                          </li>
+                          <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                  data-toggle="dropdown" aria-has="true" aria-expanded="false">
+                                  Profile
+                              </a>
+                              <ul class="dropdown-menu animated fadeIn" aria-labelledby="navbarDropdown">
+                                  <li><a class="dropdown-item" href="/dv/dashboard/" title="Welcome - {{duser.name}}"> <i class="icon-user"></i> {{duser.name}}</a></li>
+                                 
+                                  <li><a class="dropdown-item" href="/logout/" title="Sign Out"><i class="icon-power"></i> Sign Out </a></li>
+                              </ul>
+                          </li>
+          
+                      </ul>
+                  </div>
+          </nav>
+          </div>
+
+
+    <!--footer-->
+    
+    <script src="{% static 'assets/js/vendor.bundle.base.js' %}"></script>
+    <script src="{% static 'assets/chart.js/Chart.min.js' %}"></script>
+    <script src="{% static 'assets/moment/moment.min.js' %}"></script>
+    <script src="{% static 'assets/daterangepicker/daterangepicker.js' %}"></script>
+    <script src="{% static 'assets/js/misc.js' %}"></script>
+    <script src="{% static 'assets/js/custom.js' %}"></script>
+    <script src="{% static 'assets/js/off-canvas.js' %}"></script>
+    <script src="{% static 'assets/datatables/jquery.dataTables.min.js' %}"></script>
+    <script src="https://cdn.datatables.net/select/1.3.3/js/dataTables.select.min.js' %}"></script>
+    <script src="{% static 'assets/datatables-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'assets/datatables-responsive/js/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'assets/datatables-responsive/js/responsive.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'assets/datatables-buttons/js/dataTables.buttons.min.js' %}"></script>
+    <script src="{% static 'assets/datatables-buttons/js/buttons.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'assets/datatables-buttons/js/buttons.html5.min.js' %}"></script>
+    <script src="{% static 'assets/datatables-buttons/js/buttons.print.min.js' %}"></script>
+    <script src="{% static 'assets/datatables-buttons/js/buttons.colVis.min.js' %}"></script>
+    <script src="{% static 'assets/select2/select2.min.js' %}"></script>
+    <script src="{% static 'assets/js/select2.js' %}"></script>
+    <script src="{% static 'assets/chartist/chartist.min.js' %}"></script>
+
+</body>
+  
+</html>

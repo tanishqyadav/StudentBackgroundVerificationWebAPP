@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block body %}
+     <div class="main-panel">
+
+          <div class="content-wrapper">
+      
+      
+              <div class="col-12 stretch-card grid-margin">
+                  <div class="card card-secondary">
+                      <div class="card-body d-lg-flex  justify-content-between">
+      
+                          <div class="font-weight-semibold">Revisit</div>
+                          <div class="font-weight-semibold"><h5>Welcome!! <span style="font-size :26px;"> {{hi}}</span></h5> 
+                              <h9>Revisit is a special feature, use it wisely</h9></div>
+                                  
+                      </div>
+                  </div>
+              </div>
+      
+      
+      
+      
+              <div class="col-lg-12">
+                  <div class="card card-secondary mb-4">
+                      <div class="card-body justify-content-between">
+                          <!-- <h5>Details </h5> -->
+                          <div class="row">
+      
+                              <div class="col-lg-3">
+                              <form action="" method="post">
+                                   {% csrf_token %}
+                                   {{form.as_p}}
+                              
+                              
+                              <div class="col-lg-3">
+                                   <button class="btn btn-sm btn-primary btn-rounded mt-2" type="submit">Submit</button>
+                              </div>
+                         </form>
+                    </div>
+                          </div>
+      
+                      </div>
+                  </div>
+              </div>
+              {% if vobj %}
+              <div class="col-lg-12">
+                  <div class="card card-secondary mb-4">
+                      <div class="card-body justify-content-between">
+      
+                        <div class="row justify-content-between" >
+                          <!-- <div class="col-sm-2">
+                          <div style="display:block; margin:auto;">
+                              <button class="btn btn-sm btn-primary btn-rounded mt-2">
+                                   <a href="/dv/documentvrecieved/addrn/{{vobj.id}}">Doc Verification</a>
+                              </button>
+                          </div>
+                          </div> -->
+                          <div class="col-sm-2">
+                          <div style="display:block; margin:auto;">
+                              <button class="btn btn-sm btn-primary btn-rounded mt-2">
+                                   <a href="/dv/documentvrecieved/addrn/alotthem/{{vobj.id}}">Allotment</a>
+                              </button>
+                          </div>
+                          </div>
+                        </div>
+      
+      
+                      </div>
+      
+                  </div>
+              </div>
+              {%endif%}
+      
+          </div>
+
+{% endblock %}
